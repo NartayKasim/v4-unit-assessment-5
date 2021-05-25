@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Dash.css';
 
 class Dash extends Component {
@@ -45,7 +46,7 @@ class Dash extends Component {
 
   deletePost = id => {
     axios.delete(`/api/post/${id}`)
-      .then(_ => this.grabPosts())
+      .then(() => this.grabPosts())
   }
 
   reset() {
@@ -61,24 +62,26 @@ class Dash extends Component {
   }
 
   render() {
-    let {loading, search, posts, myPosts, oldestFirst} = this.state
+    let { loading, search, posts, myPosts, oldestFirst } = this.state
 
     let mappedPosts = posts.map(post => {
       return <div className='content-box dash-post-box' key={post.post_id}>
+        <Link to={`/post/${post.post_id}`}>
           <h3>{post.title}</h3>
-          {
-            post.author_username === this.props.username 
+        </Link>
+        {
+          post.author_username === this.props.username
             ?
-            <button onClick={_ => this.deletePost(post.post_id)}>delete your post</button>
+            <button onClick={() => this.deletePost(post.post_id)}>delete your post</button>
             :
             <div className='author-box'>
               <p>by {post.author_username}</p>
               <img src={post.profile_pic} alt='author' />
             </div>
-          }
-        </div>
+        }
+      </div>
     })
-    
+
     return (
       <div className='dash'>
         <div className='content-box dash-filter'>
@@ -89,11 +92,11 @@ class Dash extends Component {
           </div>
           <div className='dash-check-box'>
             <p>Show My Posts</p>
-            <input checked={myPosts} onChange={_ => this.setState({ myPosts: !myPosts }, this.grabPosts)} type='checkbox' />
+            <input checked={myPosts} onChange={() => this.setState({ myPosts: !myPosts }, this.grabPosts)} type='checkbox' />
           </div>
           <div className='dash-check-box'>
             <p>Oldest to Newest</p>
-            <input checked={oldestFirst} onChange={_ => this.setState({ oldestFirst: !oldestFirst }, this.grabPosts)} type='checkbox' />
+            <input checked={oldestFirst} onChange={() => this.setState({ oldestFirst: !oldestFirst }, this.grabPosts)} type='checkbox' />
           </div>
         </div>
         <div className='content-box dash-posts-container'>

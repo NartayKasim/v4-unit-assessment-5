@@ -49,7 +49,8 @@
   }
   
   .auth-input-box {
-    display: flex;
+    display: grid;
+    grid-template-columns: 100px 200px;
     justify-content: center;
     align-items: center;
     width: 55%;
@@ -57,6 +58,7 @@
   
   .auth-input-box > input {
     height: 35px;
+    width: 100%;
     margin-left: 10px;
     border: none;
   }
@@ -69,5 +71,27 @@
   .auth-button-container {
     display: flex;
     justify-content: space-around;
-    width: 55%;
+    width: 90%;
+  }
+
+  .auth-button-container > button {
+    margin: 2rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .auth-container {
+      box-shadow: none;
+      background-image: none;
+    }
+    .auth-button-container > button {
+      margin: .7rem;
+      margin-right: 3.5rem;
+      margin-left: 3.5rem;
+    }
+  }
+
+  @media(min-width: 900px) {
+
   }
