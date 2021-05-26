@@ -1,2 +1,2 @@
 SELECT * FROM helo_users
-WHERE username = $1;
+WHERE lower(username) = lower($1);

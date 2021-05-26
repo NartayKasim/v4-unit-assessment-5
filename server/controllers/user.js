@@ -38,22 +38,22 @@ module.exports = {
         const db = req.app.get('db');
         const findUser = await db.user.find_user_by_username([username]);
         const user = findUser[0];
+        console.log(user)
 
         if (!user) {
             return res.status(401).send('Username or password not found.')
         }
 
         const isAuthenticated = bcrypt.compareSync(password, user.password);
-
+        console.log(isAuthenticated)
         if (!isAuthenticated) {
             return res.status(401).send('Username or password not found')
         }
 
-        delete user.password;
         req.session.user = {
             id: user.id,
             username: user.username,
-            profile_pic: user.profile_pic || ''
+            profile_pic: user.profile_pic
         };
         res.status(200).send(req.session.user);
     },

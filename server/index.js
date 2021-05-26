@@ -1,4 +1,3 @@
-// FRAMEWORKS, LIBRARIES, MODULES:
 const
     express = require('express'),
     massive = require('massive'),
@@ -33,7 +32,7 @@ app.use(
         saveUninitialized: false,
         secret: SESSION_SECRET,
         cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 365
+            maxAge: (1000 * 60 * 60 * 24 * 365)
         }
     })
 )
